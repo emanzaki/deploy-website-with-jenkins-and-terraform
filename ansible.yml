@@ -1,0 +1,21 @@
+---
+- name: Host website on port 88
+  hosts: servers
+  become: yes
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Ensure Apache is running
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    - name: Move index.html to web root
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        
