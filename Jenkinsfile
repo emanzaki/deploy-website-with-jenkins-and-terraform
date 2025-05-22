@@ -30,11 +30,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        Success {
-            echo 'Terraform and Ansible completed successfully.'
-        }
-        
-    }
 }
