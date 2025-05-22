@@ -36,26 +36,6 @@ data "aws_subnet" "default" {
 }
 
 
-# Internet Gateway
-resource "aws_internet_gateway" "igw" {
-  vpc_id = data.aws_vpc.default.id
-}
-
-# Route Table
-resource "aws_route_table" "route_table" {
-  vpc_id = data.aws_vpc.default.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.igw.id
-  }
-}
-
-# Route Table Association to Subnet
-resource "aws_route_table_association" "rta" {
-  subnet_id      = data.aws_subnet.default.id
-  route_table_id = aws_route_table.route_table.id
-}
 
 # Security Group
 resource "aws_security_group" "SG" {
