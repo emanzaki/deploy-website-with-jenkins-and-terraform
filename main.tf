@@ -16,6 +16,7 @@ resource "aws_instance" "name" {
   instance_type = "t2.micro"
   associate_public_ip_address = true
   key_name = "myKey" 
+  vpc_security_group_ids = [aws_security_group.SG.id]
   tags = {
     Name = "Terraform-Instance"
   }
@@ -31,11 +32,12 @@ resource "aws_security_group" "SG" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # Allow SSH from anywhere
   }
-  ingress = {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Allow HTTP from anywhere
-  }
+  ingress {
+  from_port   = 80
+  to_port     = 80
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+}
+
   
 }
