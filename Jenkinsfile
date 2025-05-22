@@ -26,7 +26,7 @@ pipeline {
                 // Clean and create the inventory file with proper format
                 sh '''
                   echo "[server]" > inventory
-                  echo "$(terraform output -raw instance_public_ip) ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/myKey.pem" >> inventory
+                  echo "$(terraform output -raw aws_instance_ip) ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/myKey.pem" >> inventory
                 '''
               }
 
