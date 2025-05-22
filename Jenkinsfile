@@ -33,7 +33,7 @@ pipeline {
               sshagent(credentials: ['myKey']) {
                 echo 'Running Ansible playbook...'
                 sh '''
-                  ansible-playbook -i inventory playbook.yml
+                  ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory playbook.yml
                 '''
               }
             }
