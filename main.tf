@@ -20,3 +20,22 @@ resource "aws_instance" "name" {
     Name = "Terraform-Instance"
   }
 }
+resource "aws_security_group" "SG" {
+  name        = "allow_ssh"
+  description = "Allow SSH inbound traffic"
+  vpc_id      = "vpc-0a1b2c3d4e5f6g7h8" # Replace with your VPC ID
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Allow SSH from anywhere
+  }
+  ingress = {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Allow HTTP from anywhere
+  }
+  
+}
