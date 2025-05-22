@@ -1,5 +1,5 @@
 ---
-- name: Host website on port 88
+- name: Host website on port 80
   hosts: servers
   become: yes
   tasks:
@@ -18,4 +18,9 @@
       copy:
         src: index.html
         dest: /var/www/html/index.html
+    
+    - name: Move picture.jpg to web root
+      copy:
+        src: hallo.gif
+        dest: /var/www/html/hallo.gif
         

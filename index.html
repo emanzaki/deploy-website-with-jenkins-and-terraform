@@ -2,12 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Eman Zaki</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+      text-align: center;
+      padding-top: 50px;
+      color: #ff69b4;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #ff1493;
+      text-shadow: 2px 2px #ffc0cb;
+      animation: pop 1s ease-out forwards;
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    img {
+      max-width: 300px;
+      height: auto;
+      margin-top: 30px;
+      border: 5px dashed #ffb6c1;
+      box-shadow: 0 0 20px #ff69b4;
+      transition: transform 0.3s ease;
+    }
+
+    img:hover {
+      transform: rotate(5deg) scale(1.05);
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, World!</h1>
-  <p>This is a simple HTML document.</p>
-  <p>Jenkins Lab 2</p>
+
+  <h1>Eman Zaki</h1>
+
+  <!-- Replace 'your-image.jpg' with your actual image path or URL -->
+  <img src="hallo.gif" alt="Eman Zaki Image">
+
 </body>
 </html>

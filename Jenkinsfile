@@ -23,6 +23,7 @@ pipeline {
         stage('Ansible Playbook') {
             steps {
               sh 'terraform output -raw aws_instance_ip >> inventory'
+              sshagent(credentials: ['myKey']) {
                 echo 'Running Ansible playbook...'
                 sh '''
                     ansible-playbook -i inventory playbook.yml
