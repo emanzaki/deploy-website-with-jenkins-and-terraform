@@ -17,6 +17,8 @@ resource "aws_instance" "name" {
   associate_public_ip_address = true
   key_name = "myKey" 
   vpc_security_group_ids = [aws_security_group.SG.id]
+  subnet_id = data.aws_vpc.default.id
+  
   tags = {
     Name = "Terraform-Instance"
   }
@@ -43,4 +45,22 @@ resource "aws_security_group" "SG" {
 }
 
   
+}
+#igw
+resource "aws_internet_gateway" "igw" {
+  vpc_id = data.aws_vpc.default.id
+}
+#route table
+resource "aws_route_table" "route_table" {
+  vpc_id = data.aws_vpc.default.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
+  }
+}
+#route table association
+resource "aws_route_table_association" "rta" {
+  subnet_id      = data.aws_vpc.default.id
+  route_table_id = aws_route_table.route_table.id
 }
