@@ -1,8 +1,17 @@
 ---
-- name: Host website on port 80
-  hosts: servers
+- name: Install and configure Apache
+  hosts: all
   become: yes
+  vars:
+    web_files:
+      - index.html
+      - hallo.gif
+
   tasks:
+    - name: Update apt package index
+      apt:
+        update_cache: yes
+
     - name: Install Apache
       apt:
         name: apache2
@@ -14,13 +23,11 @@
         state: started
         enabled: yes
 
-    - name: Move index.html to web root
+    - name: Copy web files to server
       copy:
-        src: index.html
-        dest: /var/www/html/index.html
-    
-    - name: Move picture.jpg to web root
-      copy:
-        src: hallo.gif
-        dest: /var/www/html/hallo.gif
-        
+        src: "{{ item }}"
+        dest: /var/www/html/
+        owner: www-data
+        group: www-data
+        mode: '0644'
+      loop: "{{ web_files }}"
